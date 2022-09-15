@@ -1,0 +1,11 @@
+browser->server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over server:
+server adds new note to list of notes
+end note
+
+server-->browser: {"message":"note created"}
+
+note over browser:
+browser adds new note to existing ones
+end note
