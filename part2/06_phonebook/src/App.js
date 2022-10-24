@@ -17,7 +17,7 @@ const AddNewPerson = ({ newName, setNewName, newNumber, setNewNumber, handleInpu
 
 const ShowPersons = ({ persons, search }) =>
   <ul>
-    {persons.filter(x => search === '' || x.name.toLowerCase() === search.toLowerCase()).map(x => <li key={x.id}>{x.name} {x.number}</li>)}
+    {persons.filter(x => search === '' || x.name.toLowerCase().includes(search.toLowerCase())).map(x => <li key={x.id}>{x.name} {x.number}</li>)}
   </ul>
 
 const App = () => {
