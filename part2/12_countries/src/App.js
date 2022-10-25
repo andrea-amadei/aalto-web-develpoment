@@ -34,7 +34,7 @@ const SearchList = ({ search, countries, setCountryView, setSelectedCountry }) =
 }
 
 const CountryView = ({ countryId, countries, setCountryView }) => {
-  const country = countries.filter(x => x.cca3 === countryId)[0];
+  const country = countries.find(x => x.cca3 === countryId);
   
   return (
     <div>
