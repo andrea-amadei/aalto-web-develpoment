@@ -2,16 +2,22 @@ import {useState} from "react";
 import {handleInputChange} from "../common";
 import peopleService from "../services/peopleService";
 
-const PeopleList = ({ people, setPeople }) => {
+const PeopleList = ({ people, setPeople, setNotification }) => {
   const [search, setSearch] = useState('');
   
   const handleDelete = (personId) => {
     if(window.confirm("Delete person forever?"))
       peopleService.deleteById(personId)
         .then(() => {
-          setPeople(people.filter(x => x.id !== personId))
+          setPeople(people.filter(x => x.id !== personId));
+
+          setNotification({message: 'Person successfully deleted', type: 'success'});
+          setTimeout(() => setNotification({message: null, type: 'success'}), 5000);
         })
-        .catch(error => alert(`Unable to delete person ${personId}: "${error}"`));
+        .catch(error => {
+          setNotification({message: `Unable to delete person ${personId}: "${error}"`, type: 'error'});
+          setTimeout(() => setNotification({message: null, type: 'error'}), 5000);
+        });
   }
   
   return (

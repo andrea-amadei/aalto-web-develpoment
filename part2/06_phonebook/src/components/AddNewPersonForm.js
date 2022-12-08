@@ -2,7 +2,7 @@ import {handleInputChange} from "../common";
 import {useState} from "react";
 import peopleService from "../services/peopleService";
 
-const AddNewPersonForm = ({ people, setPeople }) => {
+const AddNewPersonForm = ({ people, setPeople, setNotification }) => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   
@@ -24,8 +24,14 @@ const AddNewPersonForm = ({ people, setPeople }) => {
             setPeople(people.concat(newObject));
           else  // Should never happen
             setPeople(people.concat(response));
+
+          setNotification({message: 'Number successfully added', type: 'success'});
+          setTimeout(() => setNotification({message: null, type: 'success'}), 5000);
         })
-        .catch(error => alert(`Unable to add new person: "${error}"`));
+        .catch(error => {
+          setNotification({message: `Unable to add new person: "${error}"`, type: 'error'});
+          setTimeout(() => setNotification({message: null, type: 'error'}), 5000);
+        });
     }
     else if(window.confirm("Person already exists. Replace it?")) {
       const newObject = {name: newName, number: newNumber, id: oldObject.id};
@@ -33,8 +39,14 @@ const AddNewPersonForm = ({ people, setPeople }) => {
       peopleService.updateById(newObject.id, newObject)
         .then(response => {
           setPeople(people.map(x => x.id !== newObject.id ? x : response))
+
+          setNotification({message: 'Number successfully replaced', type: 'success'});
+          setTimeout(() => setNotification({message: null, type: 'success'}), 5000);
         })
-        .catch(error => alert(`Unable to add new person: "${error}"`));
+        .catch(error => {
+          setNotification({message: `Unable to add new person: "${error}"`, type: 'error'});
+          setTimeout(() => setNotification({message: null, type: 'error'}), 5000);
+        });
     }
   
     setNewName('');
