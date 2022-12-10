@@ -11,7 +11,12 @@ const App = () => {
   useEffect(() => {
     peopleService.getAll()
       .then(response => setPersons(response))
-      .catch(() => console.log("Unable to fetch data from server!"));
+      .catch(() => {
+        console.log("Unable to fetch data from server!");
+
+        setNotification({message: 'Unable to fetch data from server', type: 'error'});
+        setTimeout(() => setNotification({message: null, type: 'error'}), 5000);
+      });
   }, []);
   
   return (
