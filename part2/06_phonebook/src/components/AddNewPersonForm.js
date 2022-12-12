@@ -29,7 +29,7 @@ const AddNewPersonForm = ({ people, setPeople, setNotification }) => {
           setTimeout(() => setNotification({message: null, type: 'success'}), 5000);
         })
         .catch(error => {
-          setNotification({message: `Unable to add new person: "${error}"`, type: 'error'});
+          setNotification({message: `Unable to add new person: "${error.response.data.error}"`, type: 'error'});
           setTimeout(() => setNotification({message: null, type: 'error'}), 5000);
         });
     }
@@ -44,7 +44,7 @@ const AddNewPersonForm = ({ people, setPeople, setNotification }) => {
           setTimeout(() => setNotification({message: null, type: 'success'}), 5000);
         })
         .catch(error => {
-          setNotification({message: `Unable to add new person: "${error}"`, type: 'error'});
+          setNotification({message: `Unable to add new person: "${error.response.data.error}"`, type: 'error'});
           setTimeout(() => setNotification({message: null, type: 'error'}), 5000);
         });
     }
