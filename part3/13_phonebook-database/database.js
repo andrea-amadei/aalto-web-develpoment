@@ -6,7 +6,7 @@ console.log(`Connecting to ${url}`);
 
 mongoose
   .connect(url)
-  .then(result => console.log('Connected to MongoDB successfully'))
+  .then(() => console.log('Connected to MongoDB successfully'))
   .catch((error) => console.log(error.message))
 
 

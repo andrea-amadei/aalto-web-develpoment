@@ -8,7 +8,7 @@ const Person = require('./database');
 
 const app = express();
 
-morgan.token('body', (request, response) => {
+morgan.token('body', (request) => {
   if(request.method === 'POST' || request.method === 'PUT')
     return JSON.stringify(request.body);
 
@@ -84,7 +84,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
 
   Person
     .findByIdAndRemove(id)
-    .then(result => response.status(204).end())
+    .then(() => response.status(204).end())
     .catch(error => next(error));
 })
 
@@ -136,7 +136,7 @@ app.use(errorHandler);
 app.use(unknownEndpoint);
 
 
-const port = process.env.PORT || "8080";
+const port = process.env.PORT || '8080';
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
 })
