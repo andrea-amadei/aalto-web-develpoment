@@ -24,11 +24,16 @@ blogsController.post('/', async (request, response) => {
 
   const user = await User.findById(body.userId);
 
+  if(!user)
+    return response.status(400).json({ error: 'UserID does not exists' });
+
   const blog = await new Blog({...request.body, user: user.id});
 
-  const savedBlog = await blog.save();
+  let savedBlog = (await blog.save());
   user.blogs = user.blogs.concat(savedBlog.id);
   await user.save();
+
+  savedBlog = await Blog.findById(savedBlog.id).populate('user', { username: 1, name: 1 });
 
   response.status(201).json(savedBlog);
 })
@@ -59,7 +64,8 @@ blogsController.put('/:id', async (request, response) => {
     return response.status(404).send({ error: 'Id not found' });
 
   const result = await Blog
-    .findByIdAndUpdate(request.params.id, request.body, { new: true, runValidators: true, context: 'query' });
+    .findByIdAndUpdate(request.params.id, request.body, { new: true, runValidators: true, context: 'query' })
+    .populate('user', { username: 1, name: 1 });
 
   response.json(result);
 })

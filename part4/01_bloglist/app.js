@@ -29,6 +29,11 @@ app.use('/api/users', usersController);
 app.use('/api/blogs', blogsController);
 app.use('/api/login', loginController);
 
+if (process.env.NODE_ENV === 'test') {
+  const testController = require('./controllers/test');
+  app.use('/api/testing', testController);
+}
+
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
