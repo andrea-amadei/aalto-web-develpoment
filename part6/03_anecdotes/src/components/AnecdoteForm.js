@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { addAnecdote } from "../reducers/anecdoteReducer";
+import { addAnecdote } from "../reducers/anecdotesReducer";
 
-const AnecdoteList = () => {
+const AnecdoteForm = () => {
   const dispatch = useDispatch();
 
   const add = (e) => {
@@ -13,6 +13,7 @@ const AnecdoteList = () => {
 
   return (
     <div className="anecdote-form">
+      <h3>Add anecdote</h3>
       <form onSubmit={add}>
         <input name="anecdote" />
         <span> </span>
@@ -22,4 +23,4 @@ const AnecdoteList = () => {
   )
 }
 
-export default AnecdoteList;
+export default AnecdoteForm;
