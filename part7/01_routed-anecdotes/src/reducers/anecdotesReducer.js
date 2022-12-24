@@ -32,9 +32,9 @@ export const initializeAnecdotes = () => {
   }
 }
 
-export const createAnecdote = content => {
+export const createAnecdote = (content, author) => {
   return async dispatch => {
-    const newAnecdote = await anecdotesService.createNew(content);
+    const newAnecdote = await anecdotesService.createNew(content, author);
     dispatch(addAnecdote(newAnecdote));
   }
 }

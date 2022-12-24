@@ -9,8 +9,8 @@ export const getAll = async () => {
   return response.data;
 }
 
-export const createNew = async (content) => {
-  const newObject = { content, id: randomId(), votes: 0 };
+export const createNew = async (content, author) => {
+  const newObject = { content, author, id: randomId(), votes: 0 };
   const response = await axios.post(baseUrl, newObject);
 
   return response.data;

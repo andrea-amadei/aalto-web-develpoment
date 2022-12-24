@@ -17,6 +17,7 @@ const FullAnecdote = () => {
     <div className="full-anecdote">
       <h2>Anecdote</h2>
       <div className="content" style={{ marginBottom: 20 }}>{anecdote.content}</div>
+      <div className="author">Author: {anecdote.author}</div>
       <div>
         <span className="votes">Votes: {anecdote.votes}</span>
         <span> </span>
