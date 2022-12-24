@@ -1,0 +1,8 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    background-color: lightgrey;
+    padding: 10px;
+}

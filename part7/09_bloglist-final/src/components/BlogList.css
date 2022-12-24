@@ -1,0 +1,10 @@
+.blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.blog {
+    padding: 5px;
+    border: 2px solid black;
+}
